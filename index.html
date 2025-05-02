@@ -319,6 +319,18 @@
       z-index: 2000;
       opacity: 0;
       pointer-events: none;
+      max-width: 90%;
+      text-align: center;
+      white-space: nowrap;
+    }
+    
+    /* Ajuste para pantallas pequeñas */
+    @media screen and (max-width: 768px) {
+      .notification {
+        font-size: 24px;
+        padding: 12px 24px;
+        white-space: normal; /* Permitir saltos de línea en pantallas pequeñas */
+      }
     }
     
     @keyframes notificationAppear {
@@ -335,6 +347,11 @@
     
     .notification.show {
       animation: notificationAppear 0.5s forwards, notificationDisappear 0.5s forwards 1.5s;
+    }
+    
+    /* Clase para notificaciones con duración extendida (6 segundos) */
+    .notification.show-extended {
+      animation: notificationAppear 0.5s forwards, notificationDisappear 0.5s forwards 6s;
     }
     
     /* Estilos para el modal de personalización */
@@ -908,8 +925,8 @@
 
 <body>
   <!-- Notificaciones -->
-  <div class="notification" id="appliedNotification">Applied</div>
-  <div class="notification" id="matchNotification">Match Generated</div>
+  <div class="notification" id="appliedNotification">Aplicado</div>
+  <div class="notification" id="matchNotification">Partido Generado</div>
 
   <!-- Botón Hamburguesa y Menú Desplegable -->
   <div class="menu-container">
@@ -1213,12 +1230,16 @@
       });
     }
 
+    // Variable global para almacenar el equipo 1 seleccionado
+    let equipoSeleccionado1 = null;
+
     function generarPartido() {
       let vs = document.getElementById('vs');
       
       reproducirSonido('sonidoClick');
       equipo1Listo = false;
       equipo2Listo = false;
+      equipoSeleccionado1 = null; // Reiniciar el equipo seleccionado
 
       vs.classList.add('visible');
 
@@ -1254,7 +1275,37 @@
           arrayEquipos = topClubs;
         }
 
-        const equipoRandom = arrayEquipos[Math.floor(Math.random() * arrayEquipos.length)];
+        // Verificar si hay suficientes equipos para generar un partido
+        if (arrayEquipos.length < 2) {
+          // Si no hay suficientes equipos, mostrar un mensaje y detener la generación
+          clearInterval(intervalo);
+          contenedor.innerHTML = `
+            <h2 class="nombre-equipo">Error</h2>
+            <p>No hay suficientes equipos para generar un partido</p>
+          `;
+          return;
+        }
+
+        let equipoRandom;
+        
+        // Para el equipo 2, asegurarse de que no sea el mismo que el equipo 1
+        if (numeroEquipo === 2 && equipoSeleccionado1) {
+          // Filtrar el array para excluir el equipo 1
+          const equiposDisponibles = arrayEquipos.filter(equipo => 
+            equipo.nombre !== equipoSeleccionado1.nombre
+          );
+          
+          // Seleccionar un equipo aleatorio de los disponibles
+          equipoRandom = equiposDisponibles[Math.floor(Math.random() * equiposDisponibles.length)];
+        } else {
+          // Para el equipo 1, seleccionar cualquier equipo
+          equipoRandom = arrayEquipos[Math.floor(Math.random() * arrayEquipos.length)];
+          
+          // Si es el equipo 1, guardarlo para comparar después
+          if (numeroEquipo === 1 && contador >= tiempoMaximo - velocidadCambio) {
+            equipoSeleccionado1 = equipoRandom;
+          }
+        }
         
         // Determinar si el escudo debe ser blanco
         const equiposConEscudoBlanco = ["Tottenham", "Juventus", "Napoli", "Verona", "Reims"];
@@ -1276,57 +1327,96 @@
             const equipo1Nombre = document.querySelector('#equipo1 .nombre-equipo').textContent;
             const equipo2Nombre = document.querySelector('#equipo2 .nombre-equipo').textContent;
             
-            // Lista de enfrentamientos especiales (en cualquier orden)
+            // Lista de enfrentamientos especiales con textos personalizados (en cualquier orden)
             const enfrentamientosEspeciales = [
-              ['Real Madrid', 'Barcelona'],
-              ['Real Madrid', 'Atleti'],
-              ['Barcelona', 'Atleti'],
-              ['Bayern', 'Dortmund'],
-              ['Inter', 'Milan'],
-              ['Liverpool', 'City'],
-              ['PSG', 'Bayern']
+              {equipos: ['Real Madrid', 'Barcelona'], texto: 'Salió el clásico 🤩'},
+              {equipos: ['Real Madrid', 'Atleti'], texto: 'El derbi madrileño ⚽'},
+              {equipos: ['Barcelona', 'Atleti'], texto: 'Vaya partidazo 🫡'},
+              {equipos: ['Bayern', 'Dortmund'], texto: 'Clásico alemán 👑'},
+              {equipos: ['Inter', 'Milan'], texto: 'Derby della Madonnina 🕯️'},
+              {equipos: ['Liverpool', 'City'], texto: 'Made in England 💀'},
+              {equipos: ['PSG', 'Bayern'], texto: 'La revancha de Lisboa 🪄'},
+              {equipos: ['United', 'Liverpool'], texto: 'Guerra del norte 🔥'},
+              {equipos: ['United', 'City'], texto: 'Manchester arde 💣'},
+              {equipos: ['Arsenal', 'Tottenham'], texto: 'North London is red 🧨'},
+              {equipos: ['Chelsea', 'Arsenal'], texto: 'Duelo de Londres 🏙️'},
+              {equipos: ['Juventus', 'Inter'], texto: 'Derby d\'Italia 🤌🏻'},
+              {equipos: ['Roma', 'Lazio'], texto: 'Roma se parte en dos 🏛️'},
+              {equipos: ['Napoli', 'Juventus'], texto: 'Sur vs Norte de Italia 😤'},
+              {equipos: ['Barcelona', 'Chelsea'], texto: '2009 😵'},
+              {equipos: ['Real Madrid', 'Bayern'], texto: 'Rivalidad eterna 🏆'},
+              {equipos: ['PSG', 'Real Madrid'], texto: 'Dinero vs. Historia 💰📜'},
+              {equipos: ['Liverpool', 'Milan'], texto: 'Finales que marcan época ⏳'},
+              {equipos: ['City', 'Real Madrid'], texto: 'Champions League Mode 🧊'},
+              {equipos: ['Barcelona', 'Inter'], texto: 'Pura Champions 🧠'},
+              {equipos: ['Milan', 'Juventus'], texto: 'Esto si es un clásico niño ⚖️'}
             ];
             
-            // Verificar si es un enfrentamiento especial
-            const esEspecial = enfrentamientosEspeciales.some(par => 
-              (par.includes(equipo1Nombre) && par.includes(equipo2Nombre))
+            // Buscar si el enfrentamiento actual está en la lista de especiales
+            const enfrentamientoActual = enfrentamientosEspeciales.find(item => 
+              (item.equipos.includes(equipo1Nombre) && item.equipos.includes(equipo2Nombre))
             );
+            
+            // Verificar si es un enfrentamiento especial
+            const esEspecial = enfrentamientoActual !== undefined;
             
             // Reproducir el sonido correspondiente
             if (esEspecial) {
               reproducirSonido('sonidoSpecial');
+              
+              // Mostrar el texto personalizado para este enfrentamiento
+              showMatchNotification(enfrentamientoActual.texto);
             } else {
               reproducirSonido('sonidoFinal1');
+              
+              // Mostrar la notificación estándar
+              showMatchNotification();
             }
-            
-            // Mostrar la notificación "Match Generated" cuando suena el sonido final
-            showMatchNotification();
           }
         }
       }, velocidadCambio);
     }
 
     // Función para mostrar notificaciones
-    function showNotification(notificationId) {
+    function showNotification(notificationId, duracionExtendida = false) {
       const notification = document.getElementById(notificationId);
+    
+      // Eliminar cualquier clase de animación previa
       notification.classList.remove('show');
+      notification.classList.remove('show-extended');
       
       // Forzar un reflow para reiniciar la animación
       void notification.offsetWidth;
       
-      notification.classList.add('show');
+      // Aplicar la clase de animación adecuada según la duración
+      if (duracionExtendida) {
+        notification.classList.add('show-extended');
+      } else {
+          notification.classList.add('show');
+      }
     }
     
     // Función para mostrar la notificación de cambio
     function showChangeNotification(optionName) {
       const notification = document.getElementById('appliedNotification');
-      notification.textContent = `Changed To "${optionName}"`;
+      notification.textContent = `Cambiado a "${optionName}"`;
       showNotification('appliedNotification');
     }
     
     // Función para mostrar la notificación "Match Generated"
-    function showMatchNotification() {
-      showNotification('matchNotification');
+    function showMatchNotification(textoPersonalizado) {
+      const notification = document.getElementById('matchNotification');
+      
+      // Si hay un texto personalizado, usarlo y aplicar duración extendida
+      if (textoPersonalizado) {
+        notification.textContent = textoPersonalizado;
+        // Usar duración extendida (6 segundos) para partidos especiales
+        showNotification('matchNotification', true);
+      } else {
+        // Si no, usar el texto predeterminado y duración normal
+        notification.textContent = 'Partido Generado';
+        showNotification('matchNotification', false);
+      }
     }
     
     // Definir los equipos por liga (con los mismos equipos que en big5)

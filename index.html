@@ -46,6 +46,8 @@
       color: #ecf0f1;
       margin-top: 80px;
       margin-bottom: 50px;
+      position: relative; /* Necesario para que z-index funcione */
+      z-index: 1; /* Menor z-index que el menú */
     }
 
     button {
@@ -255,6 +257,7 @@
       padding: 20px 10px 10px 10px;
       pointer-events: auto;
       opacity: 1;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra para mejor visibilidad */
     }
     
     /* Ya no necesitamos mover el botón personalizado cuando se abre el menú hamburguesa */
@@ -769,6 +772,13 @@
         width: 95%;
         padding: 15px;
         max-height: 70vh; /* Reducir altura máxima en móviles */
+        margin-top: 20px; /* Espacio adicional en la parte superior */
+      }
+      
+      /* Ajuste para el título del modal */
+      .modal-content h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
       }
       
       .league-section {
@@ -804,11 +814,30 @@
       .menu:hover {
         width: 250px;
         padding: 15px 10px 10px 10px;
+        top: 0;
+        left: 0;
+        position: fixed; /* Cambiado a fixed para evitar problemas de posicionamiento */
+        margin-top: 10px; /* Espacio desde la parte superior */
+        margin-left: 10px; /* Espacio desde la izquierda */
+        z-index: 1500; /* Mayor z-index para asegurar que esté por encima */
+        background-color: rgba(46, 204, 113, 0.95); /* Fondo semi-transparente para ver el contenido detrás */
+      }
+      
+      /* Añadir un pequeño retraso para evitar cierres accidentales */
+      .menu {
+        transition: all 0.4s ease;
       }
       
       .menu label {
         font-size: 16px;
         margin-left: 60px;
+      }
+      
+      /* Ajuste para evitar que el menú se sobreponga al título */
+      h1 {
+        z-index: 1; /* Menor z-index que el menú */
+        position: relative; /* Necesario para que z-index funcione */
+        margin-top: 100px; /* Aumentado para dar más espacio al menú desplegable */
       }
       
       /* Ajustes para el botón de guardar */

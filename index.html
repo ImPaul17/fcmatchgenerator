@@ -32,10 +32,14 @@
       font-family: 'DINPRO-LIGHTITALIC';
       src: url('fonts/DINPRO-LIGHTITALIC.OTF') format('opentype');
     }
+    @font-face {
+      font-family: 'DINPRO';
+      src: url('fonts/DINPRO.OTF') format('opentype');
+    }
 
     /* Estilos básicos */
     body {
-      font-family: 'Rifton Norm', sans-serif;
+      font-family: 'DINPRO', sans-serif;
       text-align: center;
       background-color: #1D1D1D;
       color: white;
@@ -52,6 +56,7 @@
 
     h1 {
       font-size: 3em;
+      font-family: 'Rifton Norm', sans-serif;
       color: #ecf0f1;
       margin-top: 80px;
       margin-bottom: 50px;
@@ -477,6 +482,31 @@
       width: 100%;
       position: relative;
       bottom: 0;
+      transition: all 0.5s ease;
+      animation: footerGlow 3s ease-in-out infinite alternate;
+    }
+    
+    /* Animación para el pie de página */
+    @keyframes footerGlow {
+      from { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0); }
+      to { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0.5); }
+    }
+    
+    /* Estilo para el enlace de Instagram */
+    .instagram-link {
+      color: #06F368; 
+      text-decoration: none; 
+      border-bottom: 1px dotted #06F368;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .instagram-link:hover {
+      color: white;
+      border-bottom: 1px solid white;
+      transform: translateY(-2px);
+      text-shadow: 0 0 8px rgba(6, 243, 104, 0.8);
     }
     
     .close-modal-btn {
@@ -2144,7 +2174,7 @@
   </script>
 
   <footer class="footer">
-    <span style="color: #06F368;"></span>&copy;</span> 2025 FC Match Generator | Desarrollado por <span style="color: #06F368;">ImPaul</span> | Versión <span style="color: #06F368;">Beta</span> | Todos los derechos reservados. | Herramienta no oficial para generar partidos aleatorios | Instagram: <a href="https://www.instagram.com/fcmatchgenerator/" target="_blank" style="color: #06F368; text-decoration: none; border-bottom: 1px dotted #06F368;">@fcmatchgenerator</a>
+    <span style="color: #06F368;">&copy;</span> 2025 FC Match Generator | Desarrollado por <span style="color: #06F368;">ImPaul</span> | Versión <a href="patch_notes.html" class="instagram-link">Beta A01</a> | Todos los derechos reservados. | Herramienta no oficial para generar partidos aleatorios | Instagram: <a href="https://www.instagram.com/fcmatchgenerator/" target="_blank" class="instagram-link">@fcmatchgenerator</a>
   </footer>
 
 </body>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FC Match Generator - Notas de Parche</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    /* Fuentes */
+    @font-face {
+      font-family: 'CruyffSansExpanded-Heavy';
+      src: url('fonts/CruyffSansExpanded-Heavy.e64b4629.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'CruyffSans-Bold';
+      src: url('fonts/CruyffSans-Bold.ecd5078c.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'CruyffSans-Light';
+      src: url('fonts/CruyffSans-Light.443e7d8e.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'DINPRO';
+      src: url('fonts/DINPRO.OTF') format('opentype');
+    }
+    @font-face {
+      font-family: 'DINPRO-BOLDITALIC';
+      src: url('fonts/DINPRO-BOLDITALIC.OTF') format('opentype');
+    }
+    @font-face {
+      font-family: 'DINPRO-LIGHTITALIC';
+      src: url('fonts/DINPRO-LIGHTITALIC.OTF') format('opentype');
+    }
+
+    /* Estilos básicos */
+    body {
+      font-family: 'DINPRO', sans-serif;
+      text-align: center;
+      background-color: #1D1D1D;
+      color: white;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ecf0f1;
+      margin-top: 80px;
+      margin-bottom: 30px;
+      font-family: 'CruyffSansExpanded-Heavy', sans-serif;
+    }
+
+    h2 {
+      font-family: 'CruyffSans-Bold', sans-serif;
+      color: #06F368;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #06F368;
+      padding-bottom: 10px;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background-color: #06F368;
+      color: #1D1D1D;
+      font-family: 'DINPRO-BOLDITALIC', sans-serif;
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      font-size: 1.2em;
+    }
+
+    .patch-date {
+      font-family: 'DINPRO-LIGHTITALIC', sans-serif;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 50px;
+    }
+
+    .change-category {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .change-item {
+      margin-bottom: 15px;
+      padding-left: 20px;
+      position: relative;
+      text-align: left;
+    }
+
+    .change-item::before {
+      content: "•";
+      color: #06F368;
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
+    }
+
+    .highlight {
+      color: #06F368;
+      font-weight: bold;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-family: 'DINPRO-BOLDITALIC', sans-serif;
+      border-radius: 12px;
+      border: none;
+      background-color: #06F368;
+      color: white;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      margin-top: 50px;
+      margin-bottom: 30px;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #2ecc71;
+      transform: scale(1.1);
+    }
+
+    /* Estilos para el pie de página */
+    .footer {
+      margin-top: 100px;
+      padding: 15px 0;
+      font-family: 'DINPRO-LIGHTITALIC', sans-serif;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      position: relative;
+      bottom: 0;
+      transition: all 0.5s ease;
+      animation: footerGlow 3s ease-in-out infinite alternate;
+    }
+    
+    /* Animación para el pie de página */
+    @keyframes footerGlow {
+      from { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0); }
+      to { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0.5); }
+    }
+    
+    /* Estilo para el enlace de Instagram */
+    .instagram-link {
+      color: #06F368; 
+      text-decoration: none; 
+      border-bottom: 1px dotted #06F368;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .instagram-link:hover {
+      color: white;
+      border-bottom: 1px solid white;
+      transform: translateY(-2px);
+      text-shadow: 0 0 8px rgba(6, 243, 104, 0.8);
+    }
+
+    /* Estilos para la sección de versiones */
+    .version-section {
+      margin-bottom: 80px;
+      border-bottom: 1px dashed rgba(6, 243, 104, 0.3);
+      padding-bottom: 40px;
+    }
+
+    .version-section:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>FC Match Generator</h1>
+    <h2>Historial de Actualizaciones</h2>
+
+    <!-- Versión Beta A01 -->
+    <div class="version-section">
+      <div class="version-badge">Beta A01</div>
+      <div class="patch-date">Fecha de lanzamiento: 2 de Mayo, 2025</div>
+
+      <div class="change-category">
+        <h2>Mejoras Visuales</h2>
+        <div class="change-item">
+          El símbolo de <span class="highlight">copyright (©)</span> ahora se muestra en color verde para mayor consistencia con la identidad visual.
+        </div>
+        <div class="change-item">
+          Se ha añadido una <span class="highlight">animación al enlace de Instagram</span> que se activa al pasar el cursor por encima, mejorando la experiencia de usuario.
+        </div>
+        <div class="change-item">
+          El <span class="highlight">pie de página</span> ahora cuenta con un efecto de resplandor sutil que alterna, dando un toque más dinámico a la interfaz.
+        </div>
+      </div>
+
+      <div class="change-category">
+        <h2>Cambios Generales</h2>
+        <div class="change-item">
+          Actualización de la versión de <span class="highlight">"Beta" a "Beta A01"</span>, reflejando el progreso del desarrollo.
+        </div>
+        <div class="change-item">
+          Mejoras en la consistencia visual de toda la aplicación.
+        </div>
+        <div class="change-item">
+          Optimización del rendimiento general de la aplicación.
+        </div>
+      </div>
+
+      <div class="change-category">
+        <h2>Nuevas Características</h2>
+        <div class="change-item">
+          <span class="highlight">Implementación de Notas de Parche</span>: Ahora puedes acceder a un historial detallado de todas las actualizaciones y cambios realizados en la aplicación.
+        </div>
+        <div class="change-item">
+          El número de versión en el pie de página ahora es un <span class="highlight">enlace interactivo</span> que te lleva directamente a las notas de parche.
+        </div>
+      </div>
+
+      <div class="change-category">
+        <h2>Corrección de Errores</h2>
+        <div class="change-item">
+          Solución de problemas menores de visualización en diferentes dispositivos.
+        </div>
+        <div class="change-item">
+          Mejora de la compatibilidad con diferentes navegadores.
+        </div>
+      </div>
+    </div>
+
+    <!-- Aquí se pueden añadir futuras versiones -->
+
+    <a href="index.html" class="back-button">Volver a la Aplicación</a>
+  </div>
+
+  <footer class="footer">
+    <span style="color: #06F368;">&copy;</span> 2025 FC Match Generator | Desarrollado por <span style="color: #06F368;">ImPaul</span> | Versión <a href="patch_notes.html" class="instagram-link">Beta A01</a> | Todos los derechos reservados. | Herramienta no oficial para generar partidos aleatorios | Instagram: <a href="https://www.instagram.com/fcmatchgenerator/" target="_blank" class="instagram-link">@fcmatchgenerator</a>
+  </footer>
+
+  <script>
+    // Puedes añadir cualquier funcionalidad JavaScript aquí si es necesario
+  </script>
+</body>
+</html>

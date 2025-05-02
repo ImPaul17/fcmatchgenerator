@@ -2,7 +2,7 @@
 
 Una aplicación web interactiva para generar enfrentamientos aleatorios entre equipos de fútbol de las principales ligas europeas.
 
-<img src="logo%20trans.png" alt="FC Match Generator Logo" width="400"/>
+<img src="logo%20circular.png" alt="FC Match Generator Logo" width="400"/>
 
 ## 📋 Descripción
 

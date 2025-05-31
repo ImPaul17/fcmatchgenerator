@@ -1,6 +1,6 @@
 # FC Match Generator
 
-Una aplicación web interactiva para generar enfrentamientos aleatorios entre equipos de fútbol de las principales ligas europeas.
+Una aplicación web interactiva para generar enfrentamientos aleatorios entre equipos de fútbol para FC25.
 
 <img src="logo%20trans.png" alt="FC Match Generator Logo" width="400"/>
 

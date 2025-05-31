@@ -66,16 +66,16 @@
 
     h2 {
       font-family: 'CruyffSans-Bold', sans-serif;
-      color: #06F368;
+      color: #06F368; /* Default green for other sections */
       margin-top: 40px;
       margin-bottom: 20px;
-      border-bottom: 1px solid #06F368;
+      border-bottom: 1px solid #06F368; /* Default green for other sections */
       padding-bottom: 10px;
     }
 
     .version-badge {
       display: inline-block;
-      background-color: #06F368;
+      background-color: #06F368; /* Default green for other sections */
       color: #1D1D1D;
       font-family: 'DINPRO-BOLDITALIC', sans-serif;
       padding: 5px 15px;
@@ -104,14 +104,14 @@
 
     .change-item::before {
       content: "•";
-      color: #06F368;
+      color: #06F368; /* Default green for other sections */
       position: absolute;
       left: 0;
       font-size: 1.2em;
     }
 
     .highlight {
-      color: #06F368;
+      color: #06F368; /* Default green for other sections */
       font-weight: bold;
     }
 
@@ -122,7 +122,7 @@
       font-family: 'DINPRO-BOLDITALIC', sans-serif;
       border-radius: 12px;
       border: none;
-      background-color: #06F368;
+      background-color: #06F368; /* Default green for other sections */
       color: white;
       cursor: pointer;
       transition: 0.4s;
@@ -155,15 +155,15 @@
     
     /* Animación para el pie de página */
     @keyframes footerGlow {
-      from { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0); }
-      to { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0.5); }
+      from { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0); } /* Default green for other sections */
+      to { box-shadow: 0 -2px 10px rgba(6, 243, 104, 0.5); } /* Default green for other sections */
     }
     
     /* Estilo para el enlace de Instagram */
     .instagram-link {
-      color: #06F368; 
+      color: #06F368; /* Default green for other sections */
       text-decoration: none; 
-      border-bottom: 1px dotted #06F368;
+      border-bottom: 1px dotted #06F368; /* Default green for other sections */
       transition: all 0.3s ease;
       position: relative;
       display: inline-block;
@@ -172,19 +172,49 @@
     .instagram-link:hover {
       color: white;
       border-bottom: 1px solid white;
-      transform: translateY(-2px);
-      text-shadow: 0 0 8px rgba(6, 243, 104, 0.8);
+      text-shadow: 0 0 8px rgba(6, 243, 104, 0.8); /* Default green for other sections */
     }
 
     /* Estilos para la sección de versiones */
     .version-section {
       margin-bottom: 80px;
-      border-bottom: 1px dashed rgba(6, 243, 104, 0.3);
+      border-bottom: 1px dashed rgba(6, 243, 104, 0.3); /* Default green for other sections */
       padding-bottom: 40px;
     }
 
     .version-section:last-child {
       border-bottom: none;
+    }
+
+    /* Specific styles for FC Team Generator within Beta A2 */
+    .fc-team-generator-highlight {
+      color: #9746FE; /* Purple */
+      font-weight: bold;
+    }
+    .fc-team-generator-dot::before {
+      content: "•";
+      color: #9746FE; /* Purple */
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
+    }
+    .fc-team-generator-category h2 {
+      color: #9746FE; /* Purple */
+      border-bottom: 1px solid #9746FE; /* Purple */
+    }
+    /* Style for the FC Team Generator link */
+    .fc-team-generator-link {
+      color: #9746FE; /* Purple */
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border-bottom: 1px dotted #9746FE; /* Dotted purple border */
+      font-family: 'DINPRO-LIGHTITALIC', sans-serif; /* Applied font */
+    }
+    .fc-team-generator-link:hover {
+      color: white;
+      border-bottom: 1px solid white; /* Solid white border on hover */
+      text-shadow: 0 0 8px rgba(151, 70, 254, 0.8); /* Purple glow on hover */
     }
   </style>
 </head>
@@ -197,6 +227,13 @@
     <div class="version-section">
       <div class="version-badge">Beta A2</div>
       <div class="patch-date">Fecha de lanzamiento: 1 de Junio, 2025</div>
+
+      <div class="change-category fc-team-generator-category">
+        <h2>Implementación de FC Team Generator</h2>
+        <div class="change-item fc-team-generator-dot">
+          Implementación de una <span class="fc-team-generator-highlight">Sub-aplicación llamada</span> <a href="https://impaul17.github.io/fcteamgenerator/" class="fc-team-generator-link">FC Team Generator</a>, disponible en el botón debajo del botón de personalizar, para generar equipos aleatorios.
+        </div>
+      </div>
 
       <div class="change-category">
         <h2>Nuevas Características</h2>
@@ -238,7 +275,7 @@
           <span class="highlight">Efectos visuales mejorados</span> para los partidos entre selecciones, con un resplandor dorado que resalta la importancia de los encuentros internacionales.
         </div>
         <div class="change-item">
-          El botón de retorno ahora muestra <span class="highlight">"Volver a FC Match Generator"</span> en lugar de "Volver a la Aplicación", mejorando la consistencia de la marca.
+          El botón de retorno ahora muestra <span class="highlight">"Volver a FC Match Generator"</span> en lugar de <span class="highlight">"Volver a la Aplicación"</span>, mejorando la consistencia de la marca.
         </div>
       </div>
 

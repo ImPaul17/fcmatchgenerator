@@ -398,6 +398,8 @@
         .ftg-btn img {
             filter: brightness(0) invert(1); /* Para asegurar que el logo sea blanco */
             transition: transform 0.3s ease;
+            width: 40px; /* Tamaño de la imagen */
+            height: 40px; /* Tamaño de la imagen */
         }
 
         .ftg-btn:hover img {
@@ -1523,6 +1525,11 @@
             #europauefa-selections {
                 max-height: 350px;
             }
+
+            .ftg-btn img { /* Adjusted for smaller screens */
+                width: 30px;
+                height: 30px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1553,27 +1560,27 @@
                 font-size: 20px;
             }
 
-            /* Ajustes para el modal de personalización */
+            /* Hacer el modal aún más compacto */
             .modal-content {
-                width: 95%;
-                padding: 15px;
-                max-height: 70vh;
-                margin-top: 20px;
-            }
-
-            /* Ajuste para el título del modal */
-            .modal-content h2 {
-                font-size: 24px;
-                margin-bottom: 15px;
-            }
-
-            .league-section {
                 padding: 10px;
             }
 
-            .team-item,
-            .selection-item {
-                padding: 2px;
+            .league-header h3 {
+                font-size: 16px;
+            }
+
+            /* Ajustar tamaño de botones para pantallas muy pequeñas */
+            .menu-btn,
+            .personalized-btn,
+            .ftg-btn, /* Added .ftg-btn here */
+            .patch-notes-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .patch-notes-icon {
+                width: 20px;
+                height: 20px;
             }
 
             /* Ajustes para los botones de menú */
@@ -1598,6 +1605,7 @@
                 top: 65px; /* Adjusted for very small screens */
                 right: 10px;
             }
+
 
             .menu-btn img,
             .personalized-btn img,
@@ -1946,7 +1954,7 @@
     </div>
 
     <a href="https://impaul17.github.io/fcteamgenerator/" class="ftg-btn">
-        <img src="logo trans (ftg).png" alt="Logo FC Team Generator" width="30" height="30">
+        <img src="logo trans (ftg).png" alt="Logo FC Team Generator" width="40" height="40">
     </a>
 
     <main>
